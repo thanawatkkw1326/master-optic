@@ -1,8 +1,9 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Link from 'next/link'; // เพิ่มบรรทัดนี้เข้าไปครับป๋า!
 
 const lensTypes = [
   {
@@ -45,71 +46,101 @@ const lensTypes = [
 
 export default function LensesPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
 
-      {/* 🏔️ Hero Section สำหรับหน้าเลนส์ */}
-      <section className="pt-32 pb-16 px-6 bg-gradient-to-b from-slate-50 to-white">
+      {/* 🏔️ Hero Section - ปรับขนาด Text ให้เหมาะกับมือถือ */}
+      <section className="pt-32 md:pt-48 pb-16 px-6 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
-          <span className="text-blue-600 text-xs font-black tracking-[0.4em] uppercase mb-4 block">Lens Technology</span>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 mb-6 uppercase">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-blue-600 text-[10px] md:text-xs font-black tracking-[0.4em] uppercase mb-4 block"
+          >
+            Lens Technology
+          </motion.span>
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="text-4xl md:text-8xl font-black tracking-tighter text-slate-900 mb-6 uppercase"
+          >
             Optical <span className="text-blue-600">Solutions</span>
-          </h1>
-          <p className="text-slate-500 text-lg md:text-xl font-light max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-slate-500 text-base md:text-xl font-light max-w-2xl mx-auto px-4"
+          >
             เพราะ "เลนส์" คือหัวใจสำคัญของการมองเห็น เราจึงเลือกใช้เทคโนโลยีระดับโลกเพื่อถนอมสายตาคุณ
-          </p>
+          </motion.p>
         </div>
       </section>
 
-      {/* 📦 Lens Types Grid */}
-      <section className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {lensTypes.map((lens) => (
-            <div 
+      {/* 📦 Lens Types Grid - ปรับ Padding และการจัดเรียงบนมือถือ */}
+      <section className="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+          {lensTypes.map((lens, index) => (
+            <motion.div 
               key={lens.id} 
-              className="group p-8 md:p-12 rounded-[3rem] border border-slate-100 bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col md:flex-row gap-8 items-start"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group p-6 md:p-12 rounded-[2.5rem] md:rounded-[3rem] border border-slate-100 bg-white hover:shadow-2xl transition-all duration-500 flex flex-col sm:flex-row gap-6 md:gap-8 items-start"
             >
-              <div className={`w-20 h-20 shrink-0 rounded-[2rem] ${lens.color} flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-500`}>
+              {/* Icon Container */}
+              <div className={`w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-2xl md:rounded-[2rem] ${lens.color} flex items-center justify-center text-3xl md:text-4xl group-hover:rotate-12 transition-transform duration-500`}>
                 {lens.icon}
               </div>
-              <div>
-                <span className={`text-[10px] font-black tracking-widest uppercase ${lens.textColor} mb-2 block`}>
+              
+              <div className="flex-1">
+                <span className={`text-[9px] md:text-[10px] font-black tracking-widest uppercase ${lens.textColor} mb-2 block`}>
                   {lens.benefit}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+                <h3 className="text-xl md:text-3xl font-bold text-slate-900 mb-3 tracking-tight">
                   {lens.name}
                 </h3>
-                <p className="text-slate-500 leading-relaxed font-light mb-6">
+                <p className="text-sm md:text-base text-slate-500 leading-relaxed font-light mb-6">
                   {lens.desc}
                 </p>
-                <button className="text-slate-900 font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
-                  ปรึกษาผู้เชี่ยวชาญ <span className="text-blue-600">→</span>
-                </button>
+                <Link href="/contact">
+                   <button className="text-slate-900 font-bold text-[10px] md:text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                    ปรึกษาผู้เชี่ยวชาญ <span className="text-blue-600">→</span>
+                  </button>
+                </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* 💡 Info Banner */}
-      <section className="px-6 pb-32">
-        <div className="max-w-7xl mx-auto bg-slate-950 rounded-[3rem] p-10 md:p-20 relative overflow-hidden text-center md:text-left">
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+      {/* 💡 Info Banner - ปรับให้สวยเด่นบนมือถือ */}
+      <section className="px-4 md:px-6 pb-20 md:pb-32">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-7xl mx-auto bg-slate-950 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 relative overflow-hidden text-center md:text-left shadow-2xl"
+        >
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-10">
             <div className="max-w-xl">
-              <h2 className="text-white text-3xl md:text-5xl font-bold mb-6 tracking-tight leading-tight">
+              <h2 className="text-white text-2xl md:text-5xl font-bold mb-4 md:mb-6 tracking-tight leading-tight">
                 ไม่แน่ใจว่าควรใช้เลนส์แบบไหน?
               </h2>
-              <p className="text-slate-400 text-lg font-light">
-                เข้ามาตรวจวัดสายตาด้วยระบบ AI ฟรีที่หน้าร้าน Master Optic ทีมจักษุมาตรพร้อมให้คำแนะนำที่เหมาะกับไลฟ์สไตล์ของคุณที่สุด
+              <p className="text-slate-400 text-sm md:text-lg font-light">
+                เข้ามาตรวจวัดสายตาด้วยระบบ AI ฟรีที่หน้าร้าน <span className="text-blue-400">Master Optic</span> ทีมจักษุมาตรพร้อมให้คำแนะนำที่เหมาะกับคุณที่สุด
               </p>
             </div>
-            <button className="bg-blue-600 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-blue-600 transition-all shadow-xl shadow-blue-600/20 active:scale-95 whitespace-nowrap">
-              นัดหมายตรวจวัดสายตา
-            </button>
+            <Link href="/contact" className="w-full lg:w-auto">
+              <button className="w-full lg:w-auto bg-blue-600 text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-blue-600 transition-all active:scale-95 shadow-xl shadow-blue-600/20">
+                นัดหมายตรวจวัดสายตา
+              </button>
+            </Link>
           </div>
-          {/* Decorative Circle */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -translate-y-1/2 translate-x-1/2" />
-        </div>
+          {/* Ambient Glow */}
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/30 blur-[100px]" />
+        </motion.div>
       </section>
 
       <Footer />

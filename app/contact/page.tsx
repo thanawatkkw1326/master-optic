@@ -17,7 +17,7 @@ export default function ContactSuccess() {
 
   const shopInfo = {
     name: "แว่นตามาสเตอร์ (Master Optic)",
-    address: "123/1189 โครงการยูเซ็นเตอร์ มข. อคม.5 หมู่ 16 ต.ในเมือง อ.เมือง จ.ขอนแก่น 40002",
+    address: "123/118 โครงการยูเซ็นเตอร์ มข. อคม.5 หมู่ 16 ต.ในเมือง อ.เมือง จ.ขอนแก่น 40002",
     phone: "080-400-0803", // เบอร์ร้านป๋า
     line: "@masteroptic",   // LINE ร้าน
     facebook: "Master Optic KKU",
@@ -48,7 +48,7 @@ export default function ContactSuccess() {
           Contact <span className="text-blue-400">Master Optic</span>
         </h1>
         <p className="text-slate-400 text-sm md:text-base font-medium max-w-xl mx-auto px-4 leading-relaxed">
-          ศูนย์แว่นตาและเลนส์คุณภาพสูง ย่านกังสดาล มหาวิทยาลัยขอนแก่น <br className="hidden md:block"/> พร้อมดูแลสายตาคุณด้วยเครื่องมือที่ทันสมัยที่สุด
+          ศูนย์แว่นตาและเลนส์คุณภาพสูง มหาวิทยาลัยขอนแก่น <br className="hidden md:block"/> พร้อมดูแลสายตาคุณด้วยเครื่องมือที่ทันสมัยที่สุด
         </p>
       </section>
 
@@ -86,7 +86,7 @@ export default function ContactSuccess() {
                 onClick={handleOpenMap}
                 className="group w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[13px] shadow-xl hover:bg-blue-600 transition-all active:scale-95 flex items-center justify-center gap-3"
               >
-                <span>กดดูแผนที่และนำทางผ่าน Google Maps</span>
+                <span>กดดูแผนที่ Google Maps</span>
                 <span className="text-xl group-hover:translate-x-1 transition-transform">↗️</span>
               </button>
             </div>

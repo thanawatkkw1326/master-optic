@@ -5,142 +5,158 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const lensTypes = [
+const lensCategories = [
   {
     id: 1,
-    name: 'Blue Cut Precision',
-    benefit: 'กรองแสงสีฟ้าจากหน้าจอ',
-    desc: 'เหมาะสำหรับผู้ที่ใช้งานคอมพิวเตอร์และมือถือเป็นเวลานาน ช่วยลดอาการล้าของดวงตา',
-    icon: '💻',
-    color: 'bg-blue-50',
-    textColor: 'text-blue-600'
+    thaiName: 'เลนส์ชั้นเดียว (Single Vision)',
+    subTitle: 'มาตรฐานความคมชัดระดับพรีเมียม',
+    desc: 'เน้นความใสและถนอมสายตา สำหรับสายตาสั้น ยาว หรือเอียง ราคาคุ้มค่าที่สุด',
+    features: ['กรองแสงสีฟ้า 100%', 'ออกแดดเปลี่ยนสีอัตโนมัติ', 'ลดแสงสะท้อนหน้าเลนส์'],
+    // รูปแว่นตาเลนส์ใสชัดๆ
+    image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&q=80&w=800',
+    icon: '✨',
+    color: 'border-blue-500'
   },
   {
     id: 2,
-    name: 'Photochromic Pro',
-    benefit: 'เลนส์ออกแดดเปลี่ยนสี',
-    desc: 'เปลี่ยนสีเข้มขึ้นอัตโนมัติเมื่อเจอแสง UV และใสเคลียร์เมื่ออยู่ในร่ม สะดวกไม่ต้องพกแว่นกันแดด',
-    icon: '☀️',
-    color: 'bg-slate-100',
-    textColor: 'text-slate-600'
+    thaiName: 'เลนส์ย่อบาง (High Index)',
+    subTitle: 'จบปัญหาแว่นหนาเป็นก้นหอย',
+    desc: 'สำหรับผู้ที่ค่าสายตาสั้นเยอะ ช่วยให้เลนส์บางลงและน้ำหนักเบาขึ้นอย่างเห็นได้ชัด',
+    features: ['บางลงสูงสุด 50%', 'ใส่แล้วตาไม่เล็กดูเป็นธรรมชาติ', 'น้ำหนักเบาใส่สบายทั้งวัน'],
+    // รูปดีเทลความบางของเลนส์
+    image: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&q=80&w=800',
+    icon: '💎',
+    color: 'border-slate-400'
   },
   {
     id: 3,
-    name: 'Ultra Thin 1.74',
-    benefit: 'เลนส์ย่อบางพิเศษ',
-    desc: 'เทคโนโลยีขัดเลนส์ให้บางและเบาที่สุด เหมาะสำหรับผู้ที่มีค่าสายตาสั้นหรือยาวมากๆ',
-    icon: '✨',
-    color: 'bg-indigo-50',
-    textColor: 'text-indigo-600'
+    thaiName: 'เลนส์เฉพาะทาง (Office Lens)',
+    subTitle: 'เพื่อชาวออฟฟิศที่อยู่หน้าจอนานๆ',
+    desc: 'ลดอาการปวดตา ปรับมุมมองระยะกลางและระยะใกล้ให้กว้างเป็นพิเศษ',
+    features: ['ลดอาการตาล้า (Digital Eye Strain)', 'เห็นจอคอมชัดถนัดตา', 'ลดปัญหาปวดคอ บ่า ไหล่'],
+    // รูปคนทำงานหน้าจอคอมพิวเตอร์
+    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800',
+    icon: '🖥️',
+    color: 'border-emerald-500'
   },
   {
     id: 4,
-    name: 'Office Progressive',
-    benefit: 'มองได้ทุกระยะในเลนส์เดียว',
-    desc: 'ไร้รอยต่อ มองใกล้ กลาง ไกล ได้อย่างเป็นธรรมชาติ เหมาะสำหรับผู้ที่มีสายตายาวตามวัย',
-    icon: '👓',
-    color: 'bg-emerald-50',
-    textColor: 'text-emerald-600'
+    thaiName: 'เลนส์โปรเกรสซีฟ (Progressive)',
+    subTitle: 'ชัดทุกระยะ...ไร้รอยต่อขวางตา',
+    desc: 'นวัตกรรมสำหรับวัย 40+ มองใกล้-กลาง-ไกล ได้ในแว่นเดียว ไม่ต้องถอดสลับไปมา',
+    features: ['มองชัดทุกระยะอย่างไร้รอยต่อ', 'เสริมบุคลิกภาพให้ดูดีเสมอ', 'เทคโนโลยี AI ปรับแต่งเฉพาะบุคคล'],
+    // รูปคนใส่แว่นดูสมาร์ท
+    image: 'https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&q=80&w=800',
+    icon: '👑',
+    color: 'border-amber-500'
   }
 ];
 
 export default function LensesPage() {
   return (
-    <main className="min-h-screen bg-white overflow-x-hidden">
+    <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
-      {/* 🏔️ Hero Section - ปรับขนาด Text ให้เหมาะกับมือถือ */}
-      <section className="pt-32 md:pt-48 pb-16 px-6 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.span 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-blue-600 text-[10px] md:text-xs font-black tracking-[0.4em] uppercase mb-4 block"
-          >
-            Lens Technology
-          </motion.span>
-          <motion.h1 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-4xl md:text-8xl font-black tracking-tighter text-slate-900 mb-6 uppercase"
-          >
-            Optical <span className="text-blue-600">Solutions</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-500 text-base md:text-xl font-light max-w-2xl mx-auto px-4"
-          >
-            เพราะ "เลนส์" คือหัวใจสำคัญของการมองเห็น เราจึงเลือกใช้เทคโนโลยีระดับโลกเพื่อถนอมสายตาคุณ
-          </motion.p>
+      {/* --- 🏔️ ส่วนหัว (Hero) --- */}
+      <section className="pt-32 pb-16 md:pt-48 md:pb-24 px-6 bg-slate-50 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="md:w-1/2">
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic leading-[0.9] mb-6">
+              MASTER <br /><span className="text-blue-600 underline">LENSES</span>
+            </h1>
+            <p className="text-slate-500 text-lg md:text-2xl font-medium italic border-l-4 border-blue-600 pl-6">
+              "เพราะเลนส์แต่ละชนิดคือหัวใจของการมองเห็น เราจึงคัดสรรสิ่งที่ดีที่สุดเพื่อคุณ"
+            </p>
+          </motion.div>
+          
+          <div className="md:w-1/2 flex justify-end">
+            <div className="w-full h-80 bg-blue-600 rounded-[3rem] overflow-hidden shadow-2xl rotate-3">
+              <img 
+                src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=1200" 
+                className="w-full h-full object-cover" 
+                alt="Lens Tech" 
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 📦 Lens Types Grid - ปรับ Padding และการจัดเรียงบนมือถือ */}
-      <section className="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-          {lensTypes.map((lens, index) => (
-            <motion.div 
-              key={lens.id} 
+      {/* --- 📦 ส่วนรายการเลนส์ (Grid) --- */}
+      <section className="max-w-7xl mx-auto px-4 py-20">
+        <div className="space-y-24">
+          {lensCategories.map((item, index) => (
+            <motion.div
+              key={item.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group p-6 md:p-12 rounded-[2.5rem] md:rounded-[3rem] border border-slate-100 bg-white hover:shadow-2xl transition-all duration-500 flex flex-col sm:flex-row gap-6 md:gap-8 items-start"
+              className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-10 md:gap-20`}
             >
-              {/* Icon Container */}
-              <div className={`w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-2xl md:rounded-[2rem] ${lens.color} flex items-center justify-center text-3xl md:text-4xl group-hover:rotate-12 transition-transform duration-500`}>
-                {lens.icon}
+              {/* ส่วนรูปภาพ */}
+              <div className="w-full md:w-1/2 h-[450px] relative">
+                <div className={`absolute -inset-2 bg-slate-100 rounded-[3rem] -rotate-3`}></div>
+                <div className="relative h-full w-full rounded-[3rem] overflow-hidden shadow-xl">
+                  <img src={item.image} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" alt={item.thaiName} />
+                </div>
               </div>
-              
-              <div className="flex-1">
-                <span className={`text-[9px] md:text-[10px] font-black tracking-widest uppercase ${lens.textColor} mb-2 block`}>
-                  {lens.benefit}
-                </span>
-                <h3 className="text-xl md:text-3xl font-bold text-slate-900 mb-3 tracking-tight">
-                  {lens.name}
-                </h3>
-                <p className="text-sm md:text-base text-slate-500 leading-relaxed font-light mb-6">
-                  {lens.desc}
+
+              {/* ส่วนเนื้อหา */}
+              <div className="w-full md:w-1/2 space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl">{item.icon}</span>
+                  <div className="h-[2px] w-12 bg-blue-600"></div>
+                </div>
+                
+                <div>
+                  <h2 className="text-4xl md:text-5xl font-black text-slate-900 italic mb-2 leading-tight tracking-tighter">
+                    {item.thaiName}
+                  </h2>
+                  <p className="text-blue-600 font-black uppercase tracking-[0.2em] text-sm">{item.subTitle}</p>
+                </div>
+
+                <p className="text-slate-500 text-lg leading-relaxed font-medium">
+                  {item.desc}
                 </p>
-                <Link href="/contact">
-                   <button className="text-slate-900 font-bold text-[10px] md:text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
-                    ปรึกษาผู้เชี่ยวชาญ <span className="text-blue-600">→</span>
-                  </button>
-                </Link>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                  {item.features.map((feature) => (
+                    <div key={feature} className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                      <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                      <span className="text-sm font-bold text-slate-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-8">
+                  <Link href="/contact">
+                    <button className="px-12 py-5 bg-slate-950 text-white rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-blue-600 transition-all shadow-xl active:scale-95">
+                      ดูราคาและโปรโมชั่น →
+                    </button>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* 💡 Info Banner - ปรับให้สวยเด่นบนมือถือ */}
-      <section className="px-4 md:px-6 pb-20 md:pb-32">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto bg-slate-950 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 relative overflow-hidden text-center md:text-left shadow-2xl"
-        >
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-10">
-            <div className="max-w-xl">
-              <h2 className="text-white text-2xl md:text-5xl font-bold mb-4 md:mb-6 tracking-tight leading-tight">
-                ไม่แน่ใจว่าควรใช้เลนส์แบบไหน?
-              </h2>
-              <p className="text-slate-400 text-sm md:text-lg font-light">
-                เข้ามาตรวจวัดสายตาด้วยระบบ AI ฟรีที่หน้าร้าน <span className="text-blue-400">Master Optic</span> ทีมจักษุมาตรพร้อมให้คำแนะนำที่เหมาะกับคุณที่สุด
-              </p>
-            </div>
-            <Link href="/contact" className="w-full lg:w-auto">
-              <button className="w-full lg:w-auto bg-blue-600 text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-blue-600 transition-all active:scale-95 shadow-xl shadow-blue-600/20">
-                นัดหมายตรวจวัดสายตา
-              </button>
-            </Link>
+      {/* --- 💡 Expert Tips (โทนสว่าง อ่านง่าย) --- */}
+      <section className="py-24 bg-blue-600 text-white px-6 mx-4 rounded-[4rem] mb-20 shadow-2xl shadow-blue-200">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-black italic uppercase mb-16 tracking-tighter">เคล็ดลับเลือกเลนส์</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { title: 'ปรึกษาผู้เชี่ยวชาญ', desc: 'ควรตรวจวัดด้วยระบบดิจิทัลเพื่อให้ได้ค่าที่แม่นที่สุด' },
+              { title: 'ความบางคือความเบา', desc: 'หากสั้นเยอะ แนะนำให้ย่อบางเพื่อความสวยงาม' },
+              { title: 'ถนอมดวงตา', desc: 'ยุคนี้เลนส์ Blue Cut สำคัญมากสำหรับคนทำงานหน้าจอ' }
+            ].map((tip, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-lg p-10 rounded-[2.5rem] border border-white/20">
+                <h4 className="text-xl font-black mb-4 italic underline decoration-blue-300 decoration-4">{tip.title}</h4>
+                <p className="text-sm text-blue-50 font-medium leading-relaxed">{tip.desc}</p>
+              </div>
+            ))}
           </div>
-          {/* Ambient Glow */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-600/30 blur-[100px]" />
-        </motion.div>
+        </div>
       </section>
 
       <Footer />
